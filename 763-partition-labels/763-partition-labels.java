@@ -1,35 +1,27 @@
 class Solution {
     public List<Integer> partitionLabels(String S) {
         List<Integer> answer = new ArrayList<>();
-        HashMap<Character, Integer> charMap = new HashMap<>();
-        for(char c : S.toCharArray()){
-            charMap.put(c, charMap.getOrDefault(c,0) + 1);
+        int[] lastIndex = new int[26];
+        Arrays.fill(lastIndex, -1);
+        for(int i = 0; i < S.length(); i++){
+            lastIndex[S.charAt(i) - 'a'] = i;
         }
         
         int partitionCount = 0;
-        HashSet<Character> partitionElements = new HashSet<>();
-        boolean newPartition = false;
-        
-        for(char c: S.toCharArray()){
-            //Starting a new partition
-            if(newPartition){
+        int finalIndex = lastIndex[S.charAt(0) - 'a']; 
+            
+        for(int i = 0; i < S.length(); i++){
+            char c = S.charAt(i);
+            partitionCount++;
+            if(finalIndex == i){
                 answer.add(partitionCount);
                 partitionCount = 0;
+                if(i < S.length() - 1){
+                    finalIndex = lastIndex[S.charAt(i+1) - 'a'];
+                }
             }
-            partitionCount++;
-            partitionElements.add(c);
-            int occ = charMap.get(c);
-            // update the hashmap
-            if(occ == 1){
-                charMap.remove(c);
-                partitionElements.remove(c);
-            }else{
-                charMap.put(c, occ - 1);
-            }
-            // If all duplicates of characters in the current partition are seen
-            newPartition = partitionElements.isEmpty();
+            finalIndex = Math.max(finalIndex, lastIndex[c-'a']);
         }
-        answer.add(partitionCount);
         return answer;
     }
 }

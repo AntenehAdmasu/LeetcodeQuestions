@@ -1,33 +1,16 @@
 class Solution {
     public int findDuplicate(int[] nums) {
-
-        return findDuplicate(1,nums.length,nums);
-    
+        return swap(nums, 0);
     }
     
-    
-    public int findDuplicate(int left, int right, int[] nums) {
-
-        if (right >= left) {
-            
-            int middle = (left == right) ? left : (left + right - 1) / 2;
-            if (getBelowCount(nums, middle) <= middle) {
-                return findDuplicate(middle+1, right, nums);
-            }
-            return findDuplicate(left, middle-1 , nums);
+    public int swap(int[] nums, int number){
+        // If the position is already taken, then this number is the duplicate
+        if(nums[number] == number){
+            return number;
         }
+        int displaced = nums[number];
+        nums[number] = number;
+        return swap(nums, displaced);
         
-        return left;
-
     }
-
-    
-    public int getBelowCount(int[] nums, int n) {
-        int count = 0;
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] <= n) count++;
-        }
-        return count;
-    }
-
 }

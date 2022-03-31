@@ -36,9 +36,6 @@ class Solution {
         int count = 1;
         List<Integer> neighbours = adjacencyList.get(index);
         if(neighbours != null){
-            
-            Iterator<Integer> it = neighbours.iterator();
-
             for(int neighbourIndex: neighbours){
                 if(!visited.contains(neighbourIndex)){
                     visited.add(neighbourIndex);

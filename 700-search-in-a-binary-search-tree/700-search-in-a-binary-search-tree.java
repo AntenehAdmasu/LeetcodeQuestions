@@ -13,19 +13,11 @@ class Solution {
         TreeNode right = null;
         if(root == null) return null;
 
-        if(root.val == val) return root;
-
-        if(root.left != null){
-            left = searchBST(root.left, val);
+        if(root.val == val){
+            return root;
+        }else if(root.val < val){
+            return searchBST(root.right, val);
         }
-
-        if(root.right != null){
-            right = searchBST(root.right, val);
-        }
-
-        if(left != null) return left;
-        if (right != null) return right;
-        return null;
-
+        return searchBST(root.left, val);
     }
 }

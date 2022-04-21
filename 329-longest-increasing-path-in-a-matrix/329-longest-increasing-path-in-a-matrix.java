@@ -1,13 +1,15 @@
 class Solution {
     int[][] directions = new int[][]{{1,0},{0,1},{-1,0},{0,-1}};
-    public int longestIncreasingPath(int[][] matrix) {        
-        HashMap<String, Integer> lookup = new HashMap<>();
+    public int longestIncreasingPath(int[][] matrix) {
+        int n = matrix.length;
+        int m = matrix[0].length;
+        int[][] lookup = new int[n][m];
         int maxSequence = 0;
 
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[0].length ; j++) {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
                 String cell = i + "|" + j;
-                if(lookup.containsKey(cell)){
+                if(lookup[i][j] != 0){
                     continue;
                 }
                 int sequenceLength = DFSTraverse(i, j, lookup, matrix);
@@ -18,12 +20,9 @@ class Solution {
         return maxSequence;
     }
     
-    
-    
-    private int DFSTraverse(int row, int col, HashMap<String, Integer> lookup, int[][] matrix) {
-        String cell = row + "|" + col;
-        if (lookup.containsKey(cell)) {
-            return lookup.get(cell);
+    private int DFSTraverse(int row, int col, int[][] lookup, int[][] matrix) {        
+        if (lookup[row][col] != 0) {
+            return lookup[row][col];
         }
 
         int max = 0;
@@ -35,7 +34,7 @@ class Solution {
             }
         }
         
-        lookup.put(cell, max + 1);
+        lookup[row][col] = max + 1;
         return max + 1;
     }
 }

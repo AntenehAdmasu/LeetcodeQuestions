@@ -11,6 +11,9 @@ class Solution {
             if(decimal <= upperLimit && decimal >= lowerLimit){
                 found.add(decimal);
             }
+            if(found.size() == upperLimit - lowerLimit + 1){
+                return true;
+            }
         }
         return found.size() == upperLimit - lowerLimit + 1;
     }

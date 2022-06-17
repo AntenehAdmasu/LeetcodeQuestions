@@ -17,7 +17,6 @@ class Solution {
     public int minCameraCover(TreeNode root) {
         int[] result = evaluate(root);
         if(result[0] == 0) result[1]++;
-        System.out.println(Arrays.toString(result));
         return result[1];
     }
     

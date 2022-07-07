@@ -21,7 +21,7 @@ class Solution {
         if(p1 < s1.length() && s1.charAt(p1) == currentChar){
             works |= constructS3(s1, s2, s3, p1+1, p2, curr+1, dp);
         }
-        if(p2 < s2.length() && s2.charAt(p2) == currentChar){
+        if(!works && p2 < s2.length() && s2.charAt(p2) == currentChar){
             works |= constructS3(s1, s2, s3, p1, p2+1, curr+1, dp);
         }
 

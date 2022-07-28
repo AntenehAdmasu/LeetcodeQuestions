@@ -5,20 +5,12 @@ class Solution {
 
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
-            if(smap.get(c) == null){
-                smap.put(c,1);
-            }else{
-                smap.put(c, smap.get(c)+1);
-            }
+            smap.put(c, smap.getOrDefault(c, 0) + 1);
         }
 
         for (int j = 0; j < t.length(); j++) {
             char c = t.charAt(j);
-            if(tmap.get(c) == null){
-                tmap.put(c,1);
-            }else{
-                tmap.put(c, tmap.get(c)+1);
-            }
+            tmap.put(c, tmap.getOrDefault(c, 0) + 1);
         }
         
         if(smap.values().size() != tmap.values().size()) return false;
